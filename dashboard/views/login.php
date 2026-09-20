@@ -14,7 +14,7 @@
                 <span class="block sm:inline"><?php echo htmlspecialchars($error); ?></span>
             </div>
         <?php endif; ?>
-        <form method="POST" action="/login.php">
+        <form method="POST" action="/index.php/login.php">
             <input type="hidden" name="csrf_token" value="<?php echo CSRF::generateToken(); ?>">
             <div class="mb-4">
                 <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>

@@ -23,18 +23,21 @@ $jobs = $jobManager->getJobs();
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
+        <nav class="bg-blue-600 p-4 text-white flex justify-between items-center">
         <h1 class="text-xl font-bold">Automation Platform</h1>
-        <div>
-            <span class="mr-4"><?php echo htmlspecialchars($_SESSION['user_email'] ?? ''); ?></span>
-            <a href="/logout.php" class="bg-blue-800 hover:bg-blue-900 px-3 py-1 rounded">Logout</a>
+        <div class="flex space-x-4 items-center">
+            <a href="/index.php" class="font-bold underline">Dashboard</a>
+            <a href="/index.php/courses" class="hover:underline">Courses</a>
+            <a href="/index.php/questions" class="hover:underline">Questions & Answers</a>
+            <span class="ml-4"><?php echo htmlspecialchars($_SESSION['user_email'] ?? ''); ?></span>
+            <a href="/index.php/logout.php" class="bg-blue-800 hover:bg-blue-900 px-3 py-1 rounded">Logout</a>
         </div>
     </nav>
 
     <div class="container mx-auto p-4 mt-4">
         <div class="bg-white p-6 rounded shadow mb-6">
             <h2 class="text-2xl font-bold mb-4">Create Job</h2>
-            <form method="POST" action="/" class="flex items-center space-x-4">
+            <form method="POST" action="/index.php" class="flex items-center space-x-4">
                 <input type="hidden" name="action" value="create_job">
                 <input type="hidden" name="csrf_token" value="<?php echo CSRF::generateToken(); ?>">
                 <select name="job_type" class="border rounded px-3 py-2">
@@ -79,7 +82,7 @@ $jobs = $jobManager->getJobs();
                             <td class="py-2 px-4"><?php echo htmlspecialchars($job['current_step'] ?? '-'); ?></td>
                             <td class="py-2 px-4"><?php echo htmlspecialchars($job['created_at']); ?></td>
                             <td class="py-2 px-4">
-                                <a href="/?job=<?php echo $job['id']; ?>" class="text-blue-500 hover:underline">View Logs</a>
+                                <a href="/index.php?job=<?php echo $job['id']; ?>" class="text-blue-500 hover:underline">View Logs</a>
                             </td>
                         </tr>
                         <?php endforeach; ?>
