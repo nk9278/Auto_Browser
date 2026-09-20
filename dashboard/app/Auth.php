@@ -10,7 +10,7 @@ class Auth {
         $user = $stmt->fetch();
 
         if ($user && password_verify($password, $user['password_hash'])) {
-            session_regenerate_id(true); // Prevent session fixation
+            if (session_status() === PHP_SESSION_ACTIVE && !headers_sent()) { session_regenerate_id(true); }
             $_SESSION['user_id'] = $user['id'];
             $_SESSION['user_email'] = $user['email'];
             return true;
