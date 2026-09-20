@@ -28,19 +28,33 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../app/Auth.php';
 require_once __DIR__ . '/../app/CSRF.php';
 require_once __DIR__ . '/../app/JobManager.php';
+require_once __DIR__ . '/../app/CourseManager.php';
+require_once __DIR__ . '/../app/QuestionManager.php';
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-if ($uri === '/' || $uri === '/index.php') {
+if ($uri === '/' || $uri === '/index.php' || $uri === '') {
     if (!Auth::isLoggedIn()) {
-        header('Location: /login.php');
+        header('Location: /index.php/login.php');
         exit;
     }
     require_once __DIR__ . '/../views/dashboard.php';
-} elseif ($uri === '/login.php') {
+} elseif ($uri === '/login.php' || $uri === '/index.php/login.php') {
     require_once __DIR__ . '/../app/login.php';
-} elseif ($uri === '/logout.php') {
+} elseif ($uri === '/logout.php' || $uri === '/index.php/logout.php') {
     require_once __DIR__ . '/../app/logout.php';
+} elseif ($uri === '/courses' || $uri === '/courses/') {
+    if (!Auth::isLoggedIn()) {
+        header('Location: /index.php/login.php');
+        exit;
+    }
+    require_once __DIR__ . '/../views/courses.php';
+} elseif ($uri === '/questions' || $uri === '/questions/') {
+    if (!Auth::isLoggedIn()) {
+        header('Location: /index.php/login.php');
+        exit;
+    }
+    require_once __DIR__ . '/../views/questions.php';
 } else {
     http_response_code(404);
     echo "404 Not Found";

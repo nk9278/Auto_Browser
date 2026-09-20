@@ -4,7 +4,7 @@ require_once __DIR__ . '/../app/Auth.php';
 require_once __DIR__ . '/../app/CSRF.php';
 
 if (Auth::isLoggedIn()) {
-    header('Location: /');
+    header('Location: /index.php');
     exit;
 }
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password = $_POST['password'] ?? '';
 
         if (Auth::login($email, $password)) {
-            header('Location: /');
+            header('Location: /index.php');
             exit;
         } else {
             $error = 'Invalid email or password.';
