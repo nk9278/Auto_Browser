@@ -43,13 +43,13 @@ if ($uri === '/' || $uri === '/index.php' || $uri === '') {
     require_once __DIR__ . '/../app/login.php';
 } elseif ($uri === '/logout.php' || $uri === '/index.php/logout.php') {
     require_once __DIR__ . '/../app/logout.php';
-} elseif ($uri === '/courses' || $uri === '/courses/') {
+} elseif ($uri === '/courses' || $uri === '/index.php/courses') {
     if (!Auth::isLoggedIn()) {
         header('Location: /index.php/login.php');
         exit;
     }
     require_once __DIR__ . '/../views/courses.php';
-} elseif ($uri === '/questions' || $uri === '/questions/') {
+} elseif ($uri === '/questions' || $uri === '/index.php/questions') {
     if (!Auth::isLoggedIn()) {
         header('Location: /index.php/login.php');
         exit;
